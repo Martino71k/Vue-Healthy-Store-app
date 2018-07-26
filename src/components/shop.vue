@@ -38,6 +38,7 @@
         return {
 					swiperOption: {
 						slidesPerView: 5,
+						roundLengths : true,
           	spaceBetween: 130
 					},
 					pagination: {

@@ -3,7 +3,7 @@
 		<div class="advantages__wrapper">
 			<div class="advantages__container">
 				<ul class="advantages__list cards">
-					<li class="advantages__item" v-for="(card, feature) in cards" :key="feature">
+					<li class="advantages__item" v-for="(card, feature) in cards" :key="feature" v-scroll-to="'#big-shop'">
 						<img src="" alt="">
 						<p class="cards__title"> {{ card.name }} </p>
 						<p class="cards__number"> {{ card.number }} items</p>
@@ -22,7 +22,7 @@
 			</div>
 			<div class="advantages__container">
 				<ul class="advantages__list">
-					<li class="advantages__item" v-for="(cardTwo, featureTwo) in cardsTwo" :key="featureTwo">
+					<li class="advantages__item" v-for="(cardTwo, featureTwo) in cardsTwo" :key="featureTwo" v-scroll-to="'#big-shop'">
 						<img src="" alt="">
 						<p class="cards__title"> {{ cardTwo.name }} </p>
 						<p class="cards__number"> {{ cardTwo.number }} items</p>

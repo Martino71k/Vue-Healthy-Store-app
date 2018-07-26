@@ -1,5 +1,5 @@
 <template>
-	<section class="about">
+	<section class="about" id="about">
 		<h1 class="about__title">we are <span class="about__span">organic farmfood</span></h1>
 		<p class="about__sub-text">ABOUT NATURIX FARMFOOD</p>
 		<p class="about__main-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>

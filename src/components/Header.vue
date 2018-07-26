@@ -3,13 +3,11 @@
       <header>
 				<div class="page_header__wrapper">
 					<div class="page_header">
-						<div>
-							Logo Here
-						</div>
+						<img src="../assets/logo-here.png" alt="">
 						<ul class="page_header__list">
 							<li><a class="page_header__link" href="#">Home</a></li>
-							<li><a class="page_header__link" href="#">About us</a></li>
-							<li><a class="page_header__link" href="#">Shop</a></li>
+							<li><a class="page_header__link" href="#" v-scroll-to="'#about'">About us</a></li>
+							<li><a class="page_header__link" href="#" v-scroll-to="'#big-shop'">Shop</a></li>
 							<li><a class="page_header__link" href="#">Blog</a></li>
 							<li><a class="page_header__link" href="#">Contact us</a></li>
 						</ul>
@@ -24,7 +22,7 @@
 			<div class="intro">
 				<p class="intro__text"><span class="intro__span">Best Healthy</span> Grocery Store</p>
 				<p class="intro__sub-text">ORGANIC FRUITS, VEGETABLES, AND LOT MORE TO YOUR DOOR</p>
-				<button class="intro__btn"></button>
+				<button class="intro__btn" v-scroll-to="'#big-shop'"></button>
 			</div>
     </div>
 </template>
@@ -115,7 +113,7 @@
 	}
 
 	.intro__btn::before {
-		content: "Go to the healthful shopping!";
+		content: "To the healthful shopping!";
 		color: black;
 		position: absolute;
 		border-radius: 20px;

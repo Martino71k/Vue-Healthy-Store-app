@@ -1,7 +1,7 @@
 <template>
 	<section class="big-shop">
 		<p class="big-shop__note">fresh from our farm</p>
-		<h2 class="big-shop__title"><span class="big-shop__span">naturix</span> organic goods</h2>
+		<h2 class="big-shop__title"><span class="big-shop__span" id="big-shop">naturix</span> organic goods</h2>
 		<ul class="filter">
 			<li class="filter__item">
 				<button class="filter__btn" v-for="tab in tabs"
@@ -12,9 +12,13 @@
 			</li>
 		</ul>
 		<swiper class="big-shop__goods-list" :options="secondSwiper">
-			<swiper-slide class="big-shop__goods-item" v-for="(slide, secondSlider) in slides" :key="secondSlider">
-				<p class="big-shop__goods-name">{{ slide.name }}</p>
-				<p class="big-shop__goods-price">{{ slide.price }}</p>
+			<swiper-slide class="big-shop__goods-item" v-for="(fruit, secondSlider) in fruits" :key="secondSlider" v-if="currentTab === 'organic fruits'">
+				<p class="big-shop__goods-name">{{ fruit.name }}</p>
+				<p class="big-shop__goods-price">{{ fruit.price }}</p>
+			</swiper-slide>
+			<swiper-slide class="big-shop__goods-item" v-for="(vege, secondSlider) in veges" :key="secondSlider" v-if="currentTab === 'organic vegetables'">
+				<p class="big-shop__goods-name">{{ vege.name }}</p>
+				<p class="big-shop__goods-price">{{ vege.price }}</p>
 			</swiper-slide>
 			<div class="swiper-pagination" slot="pagination"></div>
 		</swiper>
@@ -29,9 +33,12 @@
 				secondSwiper: {
 					slidesPerView: 4,
 					slidesPerColumn: 2,
+					roundLengths : true,
 					spaceBetween: 30
 				},
-				slides: [
+				currentTab: 'organic fruits',
+				tabs: ['all goods', 'organic vegetables', 'organic fruits', 'organic tea', 'all breads', 'organic juices'],
+				fruits: [
 					{ name: 'fruit', price: '13$'},
 					{ name: 'fruit', price: '13$'},
 					{ name: 'fruit', price: '13$'},
@@ -44,8 +51,19 @@
 					{ name: 'fruit', price: '13$'},
 					{ name: 'fruit', price: '13$'}
 				],
-				currentTab: 'organic fruits',
-				tabs: ['all goods', 'organic vegetables', 'organic fruits', 'organic tea', 'all breads', 'organic juices'],
+				veges: [
+					{ name: 'vege', price: '14$'},
+					{ name: 'vege', price: '14$'},
+					{ name: 'vege', price: '15$'},
+					{ name: 'vege', price: '11$'},
+					{ name: 'vege', price: '14$'},
+					{ name: 'vege', price: '14$'},
+					{ name: 'vege', price: '33$'},
+					{ name: 'vege', price: '133$'},
+					{ name: 'vege', price: '3$'},
+					{ name: 'vege', price: '33$'},
+					{ name: 'vege', price: '33$'}
+				],
 				computed: {
     			currentTabComponent () {
       		return 'tab-' + this.currentTab.toLowerCase()
