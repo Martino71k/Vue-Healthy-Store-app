@@ -5,10 +5,10 @@
 					<div class="page_header">
 						<img src="../assets/logo-here.png" alt="">
 						<ul class="page_header__list">
-							<li><a class="page_header__link" href="#">Home</a></li>
+							<li><router-link to="/" class="page_header__link">Home</router-link></li>
 							<li><a class="page_header__link" href="#" v-scroll-to="'#about'">About us</a></li>
 							<li><a class="page_header__link" href="#" v-scroll-to="'#big-shop'">Shop</a></li>
-							<li><a class="page_header__link" href="#">Blog</a></li>
+							<li><router-link to="/Server">blog</router-link></li>
 							<li><a class="page_header__link" href="#">Contact us</a></li>
 						</ul>
 						<div>
@@ -42,15 +42,15 @@
 
 	.bg::before {
 		content: "";
-		background-image: url('../assets/shape.png');
-		background-repeat: no-repeat;
+    background-image: url(/dist/shape.png?263e126…);
+    background-repeat: no-repeat;
     width: 100%;
-		height: 9%;
-		position: absolute;
-		display: block;
-		background-size: contain;
-		bottom: -30px;
-		z-index: 10;
+    height: 30px;
+    position: absolute;
+    display: block;
+    background-size: 100%;
+    bottom: 0;
+    z-index: 10;
 	}
 
 	.page_header {
@@ -113,7 +113,7 @@
 	}
 
 	.intro__btn::before {
-		content: "To the healthful shopping!";
+		content: "";
 		color: black;
 		position: absolute;
 		border-radius: 20px;
@@ -123,5 +123,16 @@
 		left: 5px;
 		top: 5px;
 		z-index: 50;
+	}
+
+	.intro__btn::after {
+		content: "To the healthful shopping!";
+		position: absolute;
+		color: black;
+		width: 80%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 51;
 	}
 </style>

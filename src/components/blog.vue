@@ -1,20 +1,22 @@
 <template>
 	<section class="blog">
-		<h3 class="blog__main-title">naturix blog</h3>
-		<p class="blog__intro"><span class="blog__span">naturix</span> latest news</p>
-		<ul class="blog__list">
-			<li class="blog__item" v-for="(article, index) in articles" :key="index">
-				<div class="blog__img-container">
-					<img :src="article.img" :alt="article.alt">
-				</div>
-				<div class="blog__content-container">
-					<time class="blog__time" datetime="2016-06-26"> {{ article.time }} </time>
-					<h4 class="blog__title"> {{ article.title }} </h4>
-					<p class="blog__text"> {{ article.text }} </p>
-					<a href="#" class="blog__link">Read article</a>
-				</div>
-			</li>
-		</ul>
+		<router-link :to="{name: 'League', params: {id: props.item.id}}">
+			<h3 class="blog__main-title">naturix blog</h3>
+			<p class="blog__intro"><span class="blog__span">naturix</span> latest news</p>
+			<ul class="blog__list">
+				<li class="blog__item" v-for="(article, index) in articles" :key="index">
+					<div class="blog__img-container">
+						<img :src="article.img" :alt="article.alt">
+					</div>
+					<div class="blog__content-container">
+						<time class="blog__time" datetime="2016-06-26"> {{ article.time }} </time>
+						<h4 class="blog__title"> {{ article.title }} </h4>
+						<p class="blog__text"> {{ article.text }} </p>
+						<a href="#" class="blog__link">Read article</a>
+					</div>
+				</li>
+			</ul>
+		</router-link>
 	</section>
 </template>
 
@@ -24,6 +26,7 @@
 			return {
 				articles: [
 					{
+						id: 1,
 						time: '15 JULY 2018',
 						title: '5 best food to make you fresh & healthy',
 						text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy...',
@@ -31,6 +34,7 @@
 						alt: 'article picture'
 					},
 					{
+						id: 2,
 						time: '26 JUNE 2018',
 						title: 'read more about our company',
 						text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy...',

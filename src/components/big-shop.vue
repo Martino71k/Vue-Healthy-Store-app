@@ -12,11 +12,18 @@
 			</li>
 		</ul>
 		<swiper class="big-shop__goods-list" :options="secondSwiper">
+			<swiper-slide class="big-shop__goods-item" v-for="(allGood, index) in allGoods" :key="index" v-if="currentTab === 'all goods'">
+				<img v-bind:src="allGood.img" v-bind:alt="allGood.alt" width="auto" height="100px">
+				<p class="big-shop__goods-name">{{ allGood.name }}</p>
+				<p class="big-shop__goods-price">{{ allGood.price }}</p>
+			</swiper-slide>
 			<swiper-slide class="big-shop__goods-item" v-for="(fruit, secondSlider) in fruits" :key="secondSlider" v-if="currentTab === 'organic fruits'">
+				<img v-bind:src="fruit.img" v-bind:alt="fruit.alt" width="auto" height="100px">
 				<p class="big-shop__goods-name">{{ fruit.name }}</p>
 				<p class="big-shop__goods-price">{{ fruit.price }}</p>
 			</swiper-slide>
 			<swiper-slide class="big-shop__goods-item" v-for="(vege, secondSlider) in veges" :key="secondSlider" v-if="currentTab === 'organic vegetables'">
+				<img v-bind:src="vege.img" v-bind:alt="vege.alt" width="auto" height="100px">
 				<p class="big-shop__goods-name">{{ vege.name }}</p>
 				<p class="big-shop__goods-price">{{ vege.price }}</p>
 			</swiper-slide>
@@ -37,22 +44,22 @@
 					spaceBetween: 30
 				},
 				currentTab: 'organic fruits',
-				tabs: ['all goods', 'organic vegetables', 'organic fruits', 'organic tea', 'all breads', 'organic juices'],
+				tabs: ['all goods', 'organic fruits', 'organic vegetables', 'organic tea', 'all breads', 'organic juices'],
 				fruits: [
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'},
-					{ name: 'fruit', price: '13$'}
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png'), alt: 'mushroom'},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')},
+					{ name: 'fruit', price: '13$', img: require('../assets/big-shop__mushroom.png')}
 				],
 				veges: [
-					{ name: 'vege', price: '14$'},
+					{ name: 'vege', price: '14$', img: require('../assets/big-shop__mushroom.png'), alt: 'mushroom'},
 					{ name: 'vege', price: '14$'},
 					{ name: 'vege', price: '15$'},
 					{ name: 'vege', price: '11$'},
@@ -64,19 +71,34 @@
 					{ name: 'vege', price: '33$'},
 					{ name: 'vege', price: '33$'}
 				],
-				computed: {
-    			currentTabComponent () {
-      		return 'tab-' + this.currentTab.toLowerCase()
-    			}
-	 			}
+				allGoods : [
+					{
+						item : [
+							{ name: 'fruit', price: '13$'},
+							{ name: 'fruit', price: '13$'}
+						]
+					},
+					{
+						veges : [
+							{ name: 'vege', price: '14$'},
+							{ name: 'vege', price: '33$'}
+						]
+					}
+      	]
 			}
-		}
+		},
+		computed: {
+					concated() {
+						this.allGoods = this.fruits.concat(this.veges)
+					}
+				}
 	}
 </script>
 
 <style>
 	.big-shop {
 		padding-top: 150px;
+		padding-bottom: 100px;
 	}
 
 	.big-shop__note {
@@ -164,8 +186,6 @@
 	.big-shop__goods-item {
 		border-radius: 13px;
 		background-color: rgb(247, 246, 242);
-		width: 270px;
-		height: 320px;
 	}
 
 	.big-shop__goods-name {

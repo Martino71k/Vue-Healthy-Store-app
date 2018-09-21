@@ -65,6 +65,11 @@
 </script>
 
 <style>
+	.daily {
+		padding-top: 100px;
+		padding-bottom: 100px;
+	}
+
 	.daily__wrapper {
 		display: flex;
 		width: 80%;

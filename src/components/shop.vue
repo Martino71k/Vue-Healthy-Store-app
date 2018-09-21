@@ -1,32 +1,65 @@
 <template>
 	<section class="shop">
 		<ul class="shop__list">
-			<li class="shop__item" v-bind:class="{ active: isActive }"><a class="shop__link"
-																v-on:click="showFruits"
-																v-on:click.prevent href="#" >organic fruits
-															</a>
+			<li class="shop__item" v-for="(tab, index) in tabs" 
+														:key="index"
+														v-bind:class="['tab-button', { active: currentTab === tab }]"
+														v-on:click="currentTab = tab">
+				<button class="shop__btn" v-bind:class=" { active: currentTab === tab }">
+					{{ tab }}
+				</button>
 			</li>
-			<li class="shop__item" v-bind:class="{ active: isActive }"><a class="shop__link"
-																v-on:click="showVeges"
-																v-on:click.prevent href="#"> organic vegetables</a></li>
-			<li class="shop__item"><a class="shop__link" href="#"> organic juices</a></li>
-			<li class="shop__item"><a class="shop__link" href="#"> organic dried fruits</a></li>
 		</ul>
 		<img class="shop__img" src="../assets/badge.png" alt="Badge">
 		<swiper class="goods__list" :options="swiperOption">
-			<swiper-slide class="goods__item" v-for="(item, index) in fruits" :key="index" v-if="fruitsList">
+			<swiper-slide class="goods__item" v-for="(fruit, index) in fruits" :key="index" v-if="currentTab === 'organic fruits'">
+				<div class="goods__hover">
+					<button class="goods__hover-link" v-on:click="toggleLike"><i class="fas fa-heart" v-bind:style='{"color" : (isActive? "#c80438" : "#bebcb5" )}'></i></button>
+					<a href="" class="goods__hover-link"><i class="fas fa-shopping-cart" style="color: #bebcb5"></i></a>
+					<a href="" class="goods__hover-link"><i class="fas fa-expand-arrows-alt" style="color: #bebcb5"></i></a>
+				</div>
+				<img class="goods__img" v-bind:src="fruit.img" v-bind:alt="fruit.alt" width="auto" height="100px">
+				<p class="goods__name">organic {{ fruit.name }}</p>
+				<div class="goods__item-container">
+					<p class="goods__name">{{ fruit.price }}</p>
+				</div>
+			</swiper-slide>
+			<swiper-slide class="goods__item" v-for="(vege, index) in veges" :key="index" v-if="currentTab === 'organic vegetables'">
 				<div class="goods__hover">
 					<a href="" class="goods__hover-link">Like</a>
 					<a href="" class="goods__hover-link">Cart</a>
 					<a href="" class="goods__hover-link">Full</a>
 				</div>
-				<p class="goods__name">organic {{ item.name }}</p>
-				<img class="goods__img" v-bind:src="item.img" v-bind:alt="fruits.alt" width="100px" height="100px">
+				<img class="goods__img" v-bind:src="vege.img" v-bind:alt="vege.alt" width="auto" height="100px">
+				<p class="goods__name">organic {{ vege.name }}</p>
 				<div class="goods__item-container">
-					<p class="goods__name">{{ item.price }}</p>
+					<p class="goods__name">{{ vege.price }}</p>
 				</div>
 			</swiper-slide>
-			<swiper-slide class="goods__item" v-for="(item, index) in veges" :key="index" v-if="vegesList">{{ item.name }}</swiper-slide>
+			<swiper-slide class="goods__item" v-for="(juice, secondSlider) in juices" :key="secondSlider" v-if="currentTab === 'organic juices'">
+				<div class="goods__hover">
+					<a href="" class="goods__hover-link">Like</a>
+					<a href="" class="goods__hover-link">Cart</a>
+					<a href="" class="goods__hover-link">Full</a>
+				</div>
+				<img class="goods__img" v-bind:src="juice.img" v-bind:alt="juice.alt" width="auto" height="100px">
+				<p class="goods__name">organic {{ juice.name }}</p>
+				<div class="goods__item-container">
+					<p class="goods__name">{{ juice.price }}</p>
+				</div>
+			</swiper-slide>
+			<swiper-slide class="goods__item" v-for="(driedFruit, secondSlider) in driedFruits" :key="secondSlider" v-if="currentTab === 'organic dried fruits'">
+				<div class="goods__hover">
+					<a href="" class="goods__hover-link">Like</a>
+					<a href="" class="goods__hover-link">Cart</a>
+					<a href="" class="goods__hover-link">Full</a>
+				</div>
+				<img class="goods__img" v-bind:src="driedFruit.img" v-bind:alt="driedFruit.alt" width="auto" height="100px">
+				<p class="goods__name">organic {{ driedFruit.name }}</p>
+				<div class="goods__item-container">
+					<p class="goods__name">{{ driedFruit.price }}</p>
+				</div>
+			</swiper-slide>
 			<div class="swiper-pagination" slot="pagination"></div>
 		</swiper>
 	</section>
@@ -37,46 +70,69 @@
       data() {
         return {
 					swiperOption: {
-						slidesPerView: 5,
+						slidesPerView: 6,
 						roundLengths : true,
-          	spaceBetween: 130
+          	spaceBetween: 30
 					},
 					pagination: {
             el: '.swiper-pagination',
 						type: 'progressbar'
-          },
-					fruitsList: true,
-					vegesList: false,
+					},
+					activeColor: '#c80438',
+					liked: false,
 					isActive: false,
+					currentTab: 'organic fruits',
+					tabs: [ 'organic fruits', 'organic vegetables', 'organic juices', 'organic dried fruits' ],
 					fruits: [ 
-						{name: 'fruit', id: 1, img: require('../assets/tomato.png'), alt: 'tomato', price: "3$"},
+						{name: 'fruit', id: 1, img: require('../assets/tomato.png'), alt: 'tomato', price: "3$", like: false},
 						{name: 'fruit', id: 2, img: require('../assets/salad.png'), alt: 'salad', price: "5$"},
 						{name: 'fruit', id: 3, img: require('../assets/chery.png'), alt: 'chery', price: "2$"},
 						{name: 'fruit', id: 4, img: require('../assets/ginger.png'), alt: 'ginger', price: "7$"},
 						{name: 'fruit', id: 5, img: require('../assets/pineapple.png'), alt: 'pineapple', price: "1$"},
-						{name: 'fruit', id: 5, img: require('../assets/pineapple.png'), alt: 'pineapple', price: "1$"}
+						{name: 'fruit', id: 5, img: require('../assets/onion.png'), alt: 'pineapple', price: "1$"}
 					],
 					veges: [ 
-						{name: 'vege', id: 6},
-						{name: 'vege', id: 7},
-						{name: 'vege', id: 8},
-						{name: 'vege', id: 9},
-						{name: 'vege', id: 10}
+						{name: 'vege', id: 6, price: '14$'},
+						{name: 'vege', id: 7, price: '14$'},
+						{name: 'vege', id: 8, price: '14$'},
+						{name: 'vege', id: 9, price: '14$'},
+						{name: 'vege', id: 10, price: '14$'},
+						{name: 'vege', id: 11, price: '14$'},
+						{name: 'vege', id: 12, price: '14$'},
+						{name: 'vege', id: 13, price: '14$'},
+						{name: 'vege', id: 14, price: '14$'}
 					],
+					juices: [
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+						{ name: 'juice', price: '14$'},
+					],
+					driedFruits: [
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'},
+						{ name: 'diedFruit', price: '14$'}
+					]
+					
         }
-      },
-      methods: {
-				showFruits() {
-					this.fruitsList = true
-					this.vegesList = false
-					this.isActive = true
-				},
-				showVeges() {
-					this.fruitsList = false
-					this.vegesList = true
-					this.isActive = true
-				}
-      }
+      }, methods: {
+						toggleLike() {
+							this.liked = ! this.liked;
+							this.isActive =! this.isActive;
+							activeColor: '#c80438'
+							console.log('lmao')
+						}
+					}
 	}
 </script>
 
@@ -128,19 +184,23 @@
 		margin-left: auto;
 	}
 
-	.shop__link {
+	.shop__btn {
+		border: 0;
+		background-color: transparent;
 		display: inline-block;
 		margin-top: 10px;
+		cursor: pointer;
 	}
 
 	.shop__img {
 		position: absolute;
 		top: -90px;
-		left: 51%;
-		transform: translateX(-51%);
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.goods__list {
+		padding: 25px;
 		display: flex;
 		width: 90%;
 		margin: 0 auto;
@@ -164,6 +224,7 @@
 
 	.goods__item:hover .goods__hover {
 		display: flex;
+		width: 80%;
 		justify-content: space-around;
 		padding-top: 13px;
 		box-sizing: border-box;
@@ -178,7 +239,7 @@
 		height: 45px;
 		z-index: 50;
 		left: 50%;
-		top: 20px;
+		top: 18px;
 		transform: translateX(-50%);
 	}
 
@@ -187,10 +248,10 @@
 		position: absolute;
 		background-image: url("../assets/goods-shape.png");
 		background-repeat: no-repeat;
-		width: 270px;
-		height: 59px;
+		background-size: 100%;
+		width: 100%;
+		height: 10%;
 		bottom: 50px;
-		left: -31px;
 	}
 
 	.goods__name {
@@ -202,14 +263,28 @@
 	.goods__img {
 		display: block;
 		margin: 0 auto;
-		margin-top: 40px;
+		margin-top: 65px;
 	}
 
 	.goods__item-container {
 		position: absolute;
 		bottom: 0;
 		background-color: white;
-		width: 200px;
+		width: 100%;
 		height: 50px;
 	}
+
+	.tab-button {
+		background-color: white;
+		border: 2px solid rgb(216, 216, 215);
+		text-align: center;
+		border-radius: 23px;
+		margin-left: 20px;
+		margin-right: 20px;
+		width: 176.666px;
+		height: 41.666px;
+		color: #9f9e9c;
+		cursor: pointer;
+	}
+	
 </style>
