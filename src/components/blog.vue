@@ -1,22 +1,20 @@
 <template>
 	<section class="blog">
-		<router-link :to="{name: 'League', params: {id: props.item.id}}">
-			<h3 class="blog__main-title">naturix blog</h3>
-			<p class="blog__intro"><span class="blog__span">naturix</span> latest news</p>
-			<ul class="blog__list">
-				<li class="blog__item" v-for="(article, index) in articles" :key="index">
-					<div class="blog__img-container">
-						<img :src="article.img" :alt="article.alt">
-					</div>
-					<div class="blog__content-container">
-						<time class="blog__time" datetime="2016-06-26"> {{ article.time }} </time>
-						<h4 class="blog__title"> {{ article.title }} </h4>
-						<p class="blog__text"> {{ article.text }} </p>
-						<a href="#" class="blog__link">Read article</a>
-					</div>
-				</li>
-			</ul>
-		</router-link>
+		<h3 class="blog__main-title">naturix blog</h3>
+		<p class="blog__intro"><span class="blog__span">naturix</span> latest news</p>
+		<ul class="blog__list">
+			<router-link tag="li" :to="{ name: 'articles', params: { placeName: detail.name } }" class="blog__item" v-for="(article, index) in articles" :key="index">
+				<div class="blog__img-container">
+					<img :src="article.img" :alt="article.alt">
+				</div>
+				<div class="blog__content-container">
+					<time class="blog__time" datetime="2016-06-26"> {{ article.time }} </time>
+					<h4 class="blog__title"> {{ article.title }} </h4>
+					<p class="blog__text"> {{ article.text }} </p>
+					<a href="#" class="blog__link">Read article</a>
+				</div>
+			</router-link>
+		</ul>
 	</section>
 </template>
 
@@ -83,6 +81,7 @@
 	.blog__item {
 		display: flex;
 		justify-content: space-around;
+		cursor: pointer;
 	}
 
 	.blog__content-container {

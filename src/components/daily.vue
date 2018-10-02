@@ -7,7 +7,7 @@
 			</div>
 			<p class="daily__text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 		</div>
-		<Countdown class="daily__timer" deadline="August 22, 2018"></Countdown>
+		<Countdown class="daily__timer" deadline="December 31, 2018"></Countdown>
 		<swiper class="daily__card-list" :options="thirdSwiper">
 			<swiper-slide class="daily__card" v-for="(dailyCard, index) in dailyCards" :key="index">
 				<p class="daily__card-category"> {{ dailyCard.category }} </p>
@@ -68,6 +68,15 @@
 	.daily {
 		padding-top: 100px;
 		padding-bottom: 100px;
+	}
+
+	/* vuecountdown */
+	.daily .vuejs-countdown li {
+		background-image: -webkit-linear-gradient( -90deg, rgb(144,211,166) 0%, rgb(117,209,215) 100%);
+    background-image: -ms-linear-gradient( -90deg, rgb(144,211,166) 0%, rgb(117,209,215) 100%);
+		border-radius: 9px;
+		width: 70px;
+		height: 70px;
 	}
 
 	.daily__wrapper {

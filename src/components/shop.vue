@@ -14,7 +14,7 @@
 		<swiper class="goods__list" :options="swiperOption">
 			<swiper-slide class="goods__item" v-for="(fruit, index) in fruits" :key="index" v-if="currentTab === 'organic fruits'">
 				<div class="goods__hover">
-					<button class="goods__hover-link" v-on:click="toggleLike"><i class="fas fa-heart" v-bind:style='{"color" : (isActive? "#c80438" : "#bebcb5" )}'></i></button>
+					<button class="goods__hover-btn" v-on:click="toggleLike"><i class="fas fa-heart" v-bind:style='{"color" : (isActive? "#c80438" : "#bebcb5" )}'></i></button>
 					<a href="" class="goods__hover-link"><i class="fas fa-shopping-cart" style="color: #bebcb5"></i></a>
 					<a href="" class="goods__hover-link"><i class="fas fa-expand-arrows-alt" style="color: #bebcb5"></i></a>
 				</div>
@@ -72,11 +72,14 @@
 					swiperOption: {
 						slidesPerView: 6,
 						roundLengths : true,
-          	spaceBetween: 30
-					},
-					pagination: {
-            el: '.swiper-pagination',
-						type: 'progressbar'
+						spaceBetween: 30,
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true,
+							renderBullet(index, className) {
+              	return `<span class="${className} swiper-pagination-bullet-shop"></span>`
+            	}
+						}
 					},
 					activeColor: '#c80438',
 					liked: false,
@@ -86,10 +89,12 @@
 					fruits: [ 
 						{name: 'fruit', id: 1, img: require('../assets/tomato.png'), alt: 'tomato', price: "3$", like: false},
 						{name: 'fruit', id: 2, img: require('../assets/salad.png'), alt: 'salad', price: "5$"},
-						{name: 'fruit', id: 3, img: require('../assets/chery.png'), alt: 'chery', price: "2$"},
+						{name: 'fruit', id: 3, img: require('../assets/cherry.png'), alt: 'chery', price: "2$"},
 						{name: 'fruit', id: 4, img: require('../assets/ginger.png'), alt: 'ginger', price: "7$"},
 						{name: 'fruit', id: 5, img: require('../assets/pineapple.png'), alt: 'pineapple', price: "1$"},
-						{name: 'fruit', id: 5, img: require('../assets/onion.png'), alt: 'pineapple', price: "1$"}
+						{name: 'fruit', id: 5, img: require('../assets/onion.png'), alt: 'pineapple', price: "1$"},
+						{name: 'fruit', id: 5, img: require('../assets/onion.png'), alt: 'pineapple', price: "1$"},
+						{name: 'fruit', id: 5, img: require('../assets/onion.png'), alt: 'pineapple', price: "1$"}	
 					],
 					veges: [ 
 						{name: 'vege', id: 6, price: '14$'},
@@ -145,7 +150,7 @@
 		margin: 0 auto;
 		margin-top: 100px;
 		display: flex;
-		min-width: 1150px;
+		min-width: 900px;
 		width: 80%;
 		justify-content: space-between;
 	}
@@ -225,6 +230,7 @@
 	.goods__item:hover .goods__hover {
 		display: flex;
 		width: 80%;
+		align-items: baseline;
 		justify-content: space-around;
 		padding-top: 13px;
 		box-sizing: border-box;
@@ -241,6 +247,12 @@
 		left: 50%;
 		top: 18px;
 		transform: translateX(-50%);
+	}
+
+	.goods__hover-btn {
+		border: 0;
+		background: transparent;
+		cursor: pointer;
 	}
 
 	.goods__item::before {
@@ -286,5 +298,23 @@
 		color: #9f9e9c;
 		cursor: pointer;
 	}
-	
+
+	.swiper-pagination-bullet-shop {
+    width: 54px;
+    height: 8px;
+    display: inline-block;
+    background: #000;
+    opacity: 0.2;
+		border-radius: 0;
+	}
+
+	.shop .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+		margin: 0;
+	}
+
+	.swiper-pagination-bullet-active {
+		opacity: 1;
+		background: #92d2a7;
+	}
+		
 </style>

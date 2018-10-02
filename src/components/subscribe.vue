@@ -6,16 +6,30 @@
 				<h3 class="subscribe__title"><span class="subscribe__span">subscribe</span> newsletter</h3>
 			</div>
 			<input class="subscribe__input" type="text" placeholder="enter your email address">
-			<button class="subscribe__btn">subscribe</button>
+			<button class="subscribe__btn" v-on:click="modalShow">subscribe</button>
+			<app-modal v-if="isModalVisible"  @close="isModalVisible = false">
+				<h3 slot="modal_header">Спасибо за подписку!</h3>
+				<p slot="modal_body">Вы успешно подписались на новостную рассылку.</p>
+			</app-modal>
 		</div>
 	</section>
 </template>
 
 <script>
+	import modal from './modal.vue'
+
 	export default {
+		components: {
+			'app-modal': modal
+		},
 		data () {
 			return {
-
+				isModalVisible: false
+			}
+		},
+		methods: {
+			modalShow() {
+				this.isModalVisible = true
 			}
 		}
 	}

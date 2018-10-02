@@ -21,6 +21,7 @@ export const routes = [
 	},
 	{
 		path: '/article/:id',
+		name: 'articles',
 		component: article
 	},
 	{ 

@@ -2,27 +2,31 @@
 	<section class="group-shop">
 		<p class="group-shop__intro">a taste of real food</p>
 		<ul class="group-shop__list">
+		
 			<li class="group-shop__item">
+				<h3>organic {{ title }}</h3>
 				<swiper class="group-shop__slider" :options="groupSlider">
 					<swiper-slide class="group-shop__slide" v-for="(item, index) in items" :key="index">
-						<p class="group-shop__slide-title">{{item.category}}</p>
-						<p class="group-shop__slide-name">{{item.name}}</p>
+						<p class="group-shop__slide-title">{{item.name}}</p>
+						<p class="group-shop__slide-name">{{item.price}}</p>
 					</swiper-slide>
 				</swiper>
 			</li>
 			<li class="group-shop__item">
+				<h3>organic {{ title }}</h3>
 				<swiper class="group-shop__slider" :options="groupSlider">
-					<swiper-slide class="group-shop__slide" v-for="(item, index) in items" :key="index">
-						<p class="group-shop__slide-title">{{item.category}}</p>
-						<p class="group-shop__slide-name">{{item.name}}</p>
+					<swiper-slide class="group-shop__slide" v-for="(organic, index) in organics" :key="index">
+						<p class="group-shop__slide-title">{{organic.name}}</p>
+						<p class="group-shop__slide-name">{{organic.price}}</p>
 					</swiper-slide>
 				</swiper>
 			</li>
 			<li class="group-shop__item">
+				<h3>organic {{ title }}</h3>
 				<swiper class="group-shop__slider" :options="groupSlider">
 					<swiper-slide class="group-shop__slide" v-for="(item, index) in items" :key="index">
-						<p class="group-shop__slide-title">{{item.category}}</p>
-						<p class="group-shop__slide-name">{{item.name}}</p>
+						<p class="group-shop__slide-title">{{item.name}}</p>
+						<p class="group-shop__slide-name">{{item.price}}</p>
 					</swiper-slide>
 				</swiper>
 			</li>
@@ -44,10 +48,11 @@
 					spaceBetween: 40,
 					roundLengths : true
 				},
+				title: 'new arrival',
 				items: [
-					{category: 'organic new arrival',name:'lmao'},
-					{name:'lmao'},
-					{name:'lmao'}
+					{ title: 'lolFFF', name: 'lmao', price: '5$' },
+					{ title: 'lols',name: 'lmaos', price: '5$' },
+					{ title: 'lolss',name: 'lmao', price: '5$' }
 				]
 			}
 		}
@@ -56,7 +61,25 @@
 
 <style>
 	.group-shop {
+		position: relative;
 		padding-bottom: 135px;
+	}
+
+	.group-shop::before {
+		content: "";
+    background-image: url(/dist/shape.png?263e126…);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    display: block;
+    background-size: 100%;
+    top: -45px;
+    z-index: 10;
+	}
+
+	.group-shop__intro {
+		text-align: center;
 	}
 
 	.group-shop__list {
